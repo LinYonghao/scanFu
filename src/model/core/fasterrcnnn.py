@@ -13,8 +13,6 @@ from torchvision.models.detection.transform import GeneralizedRCNNTransform
 
 from torchvision.ops import MultiScaleRoIAlign
 
-
-
 class FasterRCNN(GeneralizedRCNN):
     """
     Implements Faster R-CNN.

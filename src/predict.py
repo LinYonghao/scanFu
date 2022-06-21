@@ -24,7 +24,7 @@ in_features = model.roi_heads.box_predictor.cls_score.in_features
 # 替换检测头
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
 # 加载权重
-model.load_state_dict(torch.load("./model/fasterrcnn_resnet50_fpn.pth", map_location=device))
+model.load_state_dict(torch.load("fasterrcnn_resnet50_fpn.pth", map_location=device))
 model.eval()
 
 _ = model.to(device)
@@ -33,7 +33,6 @@ score_threshold = 0.7
 image_outputs = []
 
 test_dataset = FuDataset(
-        root_dir=get_path("D:\datasets\Fu"),
         img_dir=get_path("D:\datasets\Fu\JPEGImages/"),
         txt=get_path("D:\datasets\Fu\\test.txt"),
         xml_dir=get_path("D:\datasets\Fu\Annotaions/")

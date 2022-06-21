@@ -5,10 +5,13 @@ from torchvision.models.detection import FasterRCNN
 from torchvision.models.detection.rpn import AnchorGenerator
 from torch.utils.data import DataLoader
 
-from datasets.FuDataset import FuDataset
-from utils.path import get_path
+from src.datasets.FuDataset import FuDataset
+from src.utils.path import get_path
+from src.model.core.fasterrcnnn import fasterrcnn_resnet50_fpn
 import numpy as np
-model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
+
+
+model = fasterrcnn_resnet50_fpn(pretrained=True)
 print(model.roi_heads.box_predictor)
 
 num_classes = 2
@@ -17,7 +20,7 @@ in_features = model.roi_heads.box_predictor.cls_score.in_features
 
 model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
 print(model.roi_heads.box_predictor)
-
+![](../9.jpg)
 
 
 
@@ -25,14 +28,12 @@ def collate_fn(batch):
   return tuple(zip(*batch))
 
 train_dataset = FuDataset(
-        root_dir=get_path("D:\datasets\Fu"),
         img_dir=get_path("D:\datasets\Fu\JPEGImages/"),
         txt=get_path("D:\datasets\Fu\\train.txt"),
         xml_dir=get_path("D:\datasets\Fu\Annotaions/")
     )
 
 val_dataset = FuDataset(
-        root_dir=get_path("D:\datasets\Fu"),
         img_dir=get_path("D:\datasets\Fu\JPEGImages/"),
         txt=get_path("D:\datasets\Fu\\val.txt"),
         xml_dir=get_path("D:\datasets\Fu\Annotaions/")
