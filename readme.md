@@ -99,6 +99,8 @@ http://localhost:8097
 
 - [x] 手写福字检测
 
+- [ ] 复现简单的FastRCNN
+
 - [ ] 实现数据集单张图片多次增强
 
 - [ ] NanoDet实现
